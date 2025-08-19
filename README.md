@@ -1,70 +1,196 @@
-# Getting Started with Create React App
+# MJPJAY Website - React + Express.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application for the Mahatma Jyotirao Phule Jan Arogya Yojana (MJPJAY) health assurance scheme, built with React frontend and Express.js backend.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Frontend (React)
+- **Modern UI/UX**: Built with React and Tailwind CSS
+- **Responsive Design**: Mobile-first approach
+- **Interactive Components**: 
+  - Photo carousel with auto-rotation
+  - Service cards with hover effects
+  - Navigation with dropdown menus
+  - Quick links sidebar
+- **Routing**: Client-side routing with React Router
+- **Authentication**: Login/Register functionality
+- **Real-time Updates**: Dynamic content loading
 
-### `npm start`
+### Backend (Express.js)
+- **RESTful API**: Complete CRUD operations
+- **Authentication**: JWT-based authentication
+- **Database**: MongoDB with Mongoose ODM
+- **Security**: Password hashing, input validation
+- **File Upload**: Support for document uploads
+- **Email Integration**: Nodemailer for notifications
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+mjpjay-website/
+├── src/                    # React frontend
+│   ├── components/         # Reusable components
+│   ├── pages/             # Page components
+│   ├── services/          # API services
+│   └── utils/             # Utility functions
+├── backend/               # Express.js backend
+│   ├── src/
+│   │   ├── controllers/   # Route controllers
+│   │   ├── models/        # Database models
+│   │   ├── routes/        # API routes
+│   │   ├── middleware/    # Custom middleware
+│   │   └── config/        # Configuration files
+│   └── package.json
+└── README.md
+```
 
-### `npm test`
+## Installation & Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or cloud)
+- npm or yarn
 
-### `npm run build`
+### Frontend Setup
+```bash
+# Navigate to project directory
+cd mjpjay-website
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Install dependencies
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Start development server
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Backend Setup
+```bash
+# Navigate to backend directory
+cd backend
 
-### `npm run eject`
+# Install dependencies
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Create .env file (see .env.example)
+cp .env.example .env
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Start development server
+npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Environment Variables
+Create a `.env` file in the backend directory:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/mjpjay
+JWT_SECRET=your-secret-key-here
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-email-password
+NODE_ENV=development
+```
 
-## Learn More
+## API Endpoints
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - User logout
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Hospitals
+- `GET /api/hospitals` - Get all hospitals
+- `GET /api/hospitals/:id` - Get hospital by ID
+- `POST /api/hospitals` - Create hospital (admin)
+- `PUT /api/hospitals/:id` - Update hospital (admin)
+- `DELETE /api/hospitals/:id` - Delete hospital (admin)
 
-### Code Splitting
+### Patients
+- `GET /api/patients/profile` - Get patient profile
+- `PUT /api/patients/profile` - Update patient profile
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Announcements
+- `GET /api/announcements` - Get all announcements
+- `GET /api/announcements/:id` - Get announcement by ID
 
-### Analyzing the Bundle Size
+### Feedback
+- `GET /api/feedback` - Get all feedback
+- `POST /api/feedback` - Submit feedback
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Database Models
 
-### Making a Progressive Web App
+### User
+- username, email, password
+- firstName, lastName, phone
+- role (admin, hospital, patient, staff)
+- address, isActive, lastLogin
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Hospital
+- name, code, type
+- address, contact information
+- specialties, facilities
+- bedCapacity, empanelmentStatus
+- coordinates, ratings
 
-### Advanced Configuration
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Frontend
+- React 18
+- React Router DOM
+- Tailwind CSS
+- Font Awesome Icons
+- Axios (for API calls)
 
-### Deployment
+### Backend
+- Express.js
+- MongoDB with Mongoose
+- JWT Authentication
+- bcryptjs (password hashing)
+- Multer (file uploads)
+- Nodemailer (email)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Development
 
-### `npm run build` fails to minify
+### Running in Development Mode
+```bash
+# Terminal 1 - Frontend
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Terminal 2 - Backend
+cd backend
+npm run dev
+```
+
+### Building for Production
+```bash
+# Build React app
+npm run build
+
+# Start production server
+cd backend
+npm start
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the ISC License.
+
+## Support
+
+For support and questions, please contact:
+- Email: info@jeevandayee.gov.in
+- Phone: 155 388, 1800 233 2200
+
+## Acknowledgments
+
+- State Health Assurance Society, Government of Maharashtra
+- React and Express.js communities
+- Tailwind CSS team

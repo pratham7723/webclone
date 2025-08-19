@@ -1,13 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Custom styles for the MJPJAY website */
+@layer components {
+  .dropdown:hover .dropdown-menu {
+    @apply block;
+  }
+  
+  .dropdown-menu {
+    @apply min-w-[250px];
+  }
+  
+  .language-selector:hover .language-dropdown {
+    @apply block;
+  }
+  
+  .marquee {
+    @apply whitespace-nowrap overflow-hidden box-border;
+  }
+  
+  .marquee span {
+    @apply inline-block pl-[100%] animate-marquee;
+  }
+  
+  @keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+  }
+  
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
 }
