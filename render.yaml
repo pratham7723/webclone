@@ -1,3 +1,5 @@
+# MJPJAY Website - Separate Services Configuration
+# Updated: 2025-08-20 - Separate backend and frontend services
 services:
   - type: web
     name: mjpjay-backend
