@@ -1,0 +1,18 @@
+# MJPJAY Website - Single Service Configuration
+# Alternative approach: Build both frontend and backend in one service
+services:
+  - type: web
+    name: mjpjay-website
+    env: node
+    rootDir: ./
+    buildCommand: npm install && cd frontend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: REACT_APP_API_URL
+        value: https://mjpjay-website.onrender.com
+    healthCheckPath: /api/test
+    plan: free
