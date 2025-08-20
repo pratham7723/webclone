@@ -1,24 +1,22 @@
-# MJPJAY Website - Separate Services Configuration
-# Updated: 2025-08-20 - Separate backend and frontend services
+# MJPJAY Website - Single Service Configuration
+# This approach builds both frontend and backend in one service
 services:
   - type: web
-    name: mjpjay-backend
+    name: mjpjay-website
     env: node
-    rootDir: backend
-    buildCommand: npm install
-    startCommand: npm start
+    rootDir: ./
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
+      - key: REACT_APP_API_URL
+        value: https://mjpjay-website.onrender.com
+      - key: CI
+        value: false
+      - key: SKIP_PREFLIGHT_CHECK
+        value: true
     healthCheckPath: /api/test
-    plan: free
-
-  - type: web
-    name: mjpjay-frontend
-    env: static
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: build
     plan: free
