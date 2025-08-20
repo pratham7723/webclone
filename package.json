@@ -1,0 +1,31 @@
+{
+  "name": "mjpjay-website",
+  "version": "1.0.0",
+  "description": "MJPJAY Hospital Empanelment Website - Full Stack Application",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "build": "cd frontend && npm install && npm run build",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "install:all": "cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": [
+    "mjpjay",
+    "hospital",
+    "empanelment",
+    "healthcare",
+    "react",
+    "nodejs"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
