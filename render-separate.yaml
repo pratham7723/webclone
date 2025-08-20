@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: mjpjay-backend
+    env: node
+    rootDir: ./backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /api/test
+    plan: free
+
+  - type: web
+    name: mjpjay-frontend
+    env: static
+    rootDir: ./frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    plan: free
