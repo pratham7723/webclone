@@ -1,13 +1,16 @@
 services:
   - type: web
-    name: mjpjay-backend
+    name: mjpjay-website
     env: node
-    buildCommand: npm install
+    buildCommand: npm run install:all && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
+      - key: REACT_APP_API_URL
+        value: https://mjpjay-website.onrender.com
     healthCheckPath: /api/test
     autoDeploy: true
+    plan: free

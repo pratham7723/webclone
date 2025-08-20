@@ -1,10 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const path = require('path');
-
-// Load environment variables
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 
@@ -12,54 +9,42 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://your-frontend-url.vercel.app', // Update this with your actual Vercel URL
-    'https://mjpjay-website.vercel.app'     // Example URL
+    'https://mjpjay-website.onrender.com',
+    'https://your-custom-domain.com' // Add your custom domain if you have one
   ],
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Database connection (optional for testing)
-try {
-  const connectDB = require('./config/database');
-  connectDB();
-} catch (error) {
-  console.log('Database connection failed, continuing without database for testing...');
-  console.log('Error:', error.message);
-}
+// Serve static files from the React build
+app.use(express.static(path.join(__dirname, '../../frontend/build')));
 
-// Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/hospitals', require('./routes/hospitals'));
-app.use('/api/patients', require('./routes/patients'));
-app.use('/api/announcements', require('./routes/announcements'));
-app.use('/api/feedback', require('./routes/feedback'));
+// API Routes
 app.use('/api/hospital-empanelment', require('./routes/hospitalEmpanelment'));
+app.use('/api/feedback', require('./routes/feedback'));
 
 // Test endpoint
 app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is running successfully!' });
+  res.json({ message: 'MJPJAY Backend is running!' });
 });
 
-// Serve static files from React app
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../build')));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
-  });
-}
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
+// Serve React app for all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5001;
 
+// Database connection (optional for now)
+// const connectDB = require('./config/database');
+// try {
+//   connectDB();
+// } catch (error) {
+//   console.log('Database connection failed, continuing without database...');
+// }
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Test the API at: http://localhost:${PORT}/api/test`);
+  console.log(`Frontend will be served from: ${path.join(__dirname, '../../frontend/build')}`);
 }); 

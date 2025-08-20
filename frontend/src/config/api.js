@@ -13,7 +13,7 @@ const API_CONFIG = {
     }
   },
   production: {
-    baseURL: '', // Empty for same-origin requests (full stack on Render)
+    baseURL: process.env.REACT_APP_API_URL || 'https://your-backend-url.onrender.com',
     endpoints: {
       hospitalEmpanelment: '/api/hospital-empanelment',
       saveDraft: '/api/hospital-empanelment/save-draft',
