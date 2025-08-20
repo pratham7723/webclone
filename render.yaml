@@ -3,7 +3,7 @@ services:
     name: mjpjay-website
     env: node
     rootDir: ./
-    buildCommand: npm install && cd frontend && npm install && npm run build
+    buildCommand: npm install && npm run build
     startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
